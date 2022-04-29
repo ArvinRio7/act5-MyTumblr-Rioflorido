@@ -1,3 +1,17 @@
+<?php 
+SESSION_START();
+
+if (isset($_SESSION['ses_username'])===false){
+    header("Location: index.php?logfirst");
+}
+else if (isset($_REQUEST['logout'])===true){
+    session_destroy();
+    header("Location: index.php?logout");
+}
+
+?>
+
+
 <!doctype html>
                         <html>
                             <head>
@@ -32,13 +46,15 @@ body {
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-4 pt-0 pb-4 cover">
                 <div class="media align-items-end profile-head">
-                    <div class="profile mr-3"><img src="images/photo-profile.jpg" alt="..." width="150" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-outline-dark btn-sm btn-block">Edit Profile</a>
+                    <div class="profile mr-3"><img src="images/photo-profile.jpg" alt="..." width="150" class="rounded mb-2 img-thumbnail">
+                        <a href="?logout" class="btn btn-outline-dark btn-sm btn-block">Sign Out</a>
 
 
                     </div>
                     <div class="media-body mb-5 text-white">
-                        <h4 class="mt-0 mb-0">Arvin Rioflorido</h4>
-                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>Torrijos, Marinduque PH
+                        <h4 class="mt-0 mb-0"> <?php echo $_SESSION['ses_fullname']; ?> </h4>
+                        <p class="small mb-4"> <i class="fas fa-map-marker-alt mr-2"></i>
+                            <?php echo $_SESSION['ses_address']; ?>
                          </p>
                     </div>
                 </div>
@@ -46,7 +62,7 @@ body {
             <div class="bg-light p-4 d-flex justify-content-end text-center">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Photos</small>
+                        <h5 class="font-weight-bold mb-0 d-block">61</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Photos</small>
                     </li>
                     <li class="list-inline-item">
                         <h5 class="font-weight-bold mb-0 d-block">100</h5><small class="text-muted"> <i class="fas fa-user mr-1"></i>Followers</small>
@@ -61,7 +77,7 @@ body {
                 <h5 class="mb-0">Expertise </h5>
                 <div class="p-4 rounded shadow-sm bg-light">
                     <p class="font-italic mb-0">Python coder</p>
-                    <p class="font-italic mb-0">C# coder<</p>
+                    <p class="font-italic mb-0">C# coder</p>
                     <p class="font-italic mb-0">Filipino- English Speaking</p>
                 </div>
             </div>
